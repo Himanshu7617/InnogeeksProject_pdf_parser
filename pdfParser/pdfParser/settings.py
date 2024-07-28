@@ -39,6 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+#external apps
+EXTERNAL_APPS = [ 'handleData']
+
+INSTALLED_APPS += EXTERNAL_APPS
+
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
