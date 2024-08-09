@@ -15,7 +15,7 @@
             margin: 0;
         }
 
-        .container {
+        .formContainer {
             background-color: #D5F2E3;
             padding: 20px;
             border-radius: 8px;
@@ -56,7 +56,7 @@
             display: none;
         }
 
-        .custom-file-upload {
+        .custom-file-upload, #submit-button {
             display: inline-block;
             padding: 10px 20px;
             cursor: pointer;
@@ -80,33 +80,37 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>PDF Extractor</h1>
-        <label class="label upload-label" for="pdfUpload">Upload PDF:</label>
-        <label for="pdfUpload" class="custom-file-upload">Choose File</label>
-        <input type="file" id="pdfUpload" name="pdfUpload" accept=".pdf">
-<br>
-<label class="label" for="numFields">Number of Input Fields:</label>
-<input type="number" id="numFields" min="0" max="20" step="1" value="0">
-
-        <div id="formContainer"></div>
+    <div class="formContainer">
+        <form action='/home/' method='POST'>
+            <h1>PDF Extractor</h1>
+            <label class="label upload-label" for="pdfUpload">Upload PDF:</label>
+            <label for="pdfUpload" class="custom-file-upload">Choose File</label>
+            <input type="file" id="pdfUpload" name="pdfUpload" accept=".pdf">
+    <br>
+            <label class="label" for="numFields">Number of columns:</label>
+            <input type="number" id="numFields" min="0" max="20" step="1" value="0">
+            <button id='generate-button'>{% once == true ? 'Generate Columns' : 'Generate More Columns'%}</button>
+            <div id="columnContainer"></div>
+            <button type='submit' id='submit-button'>Submit</button>
+        </form>
+ 
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
     const numFields = document.getElementById('numFields');
-    const formContainer = document.getElementById('formContainer');
+    const columnContainer = document.getElementById('columnContainer');
 
     numFields.addEventListener('change', function() {
         const numberOfFields = parseInt(numFields.value);
-        formContainer.innerHTML = ''; 
+        columnContainer.innerHTML = ''; 
 
         for (let i = 0; i < numberOfFields; i++) {
             const inputField = document.createElement('input');
             inputField.type = 'text';
             inputField.className = 'input-field';
-            inputField.placeholder = `Input ${i + 1}`;
-            formContainer.appendChild(inputField);
+            inputField.placeholder = `column ${i + 1}`;
+            columnContainer.appendChild(inputField);
         }
     });
 });

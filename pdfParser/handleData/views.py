@@ -4,4 +4,4 @@ from django.shortcuts import render
 #creating a view for just testing the initiation FEEL FREE TO ERASE IT 
 
 def homePage(request):
-    return  render(request,"index.html")
+    return  render(request,"index.html",{'once':'true'})
