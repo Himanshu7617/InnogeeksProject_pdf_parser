@@ -1,0 +1,21 @@
+# Virtual environment
+env/
+.venv/
+sankalpENV/
+
+
+# Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE and editor files
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Include requirements.txt
+!requirements.txt
