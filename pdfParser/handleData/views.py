@@ -1,8 +1,7 @@
 from django.shortcuts import render, HttpResponse
 import tabula
 
-# Create your views here.
-#creating a view for just testing the initiation FEEL FREE TO ERASE IT 
+
 schema_cols_name = []
 
 
@@ -17,8 +16,6 @@ def homePage(request):
             
             # print(uploaded_pdf)
 
-            #creating the model dynamically
-            
 
             #getting the data outta pdf file
 
