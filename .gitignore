@@ -19,3 +19,7 @@ Thumbs.db
 
 # Include requirements.txt
 !requirements.txt
+
+db.sqlite3
+/env
+*.env
