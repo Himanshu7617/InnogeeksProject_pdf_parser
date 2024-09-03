@@ -26,26 +26,23 @@ def homePage(request):
             total_cols = int(request.POST.get('numfields'))
             table_name = "dynamic_table"
 
-            schema_cols_name = []  # Clear the list before appending new column names
+            schema_cols_name = [] 
             for i in range(total_cols):
                 col_name = request.POST.get(f'column{i}')
-                if col_name:  # Check if the column name is provided
+                if col_name:  
                     schema_cols_name.append(col_name)
 
-            # Check if there are any column names before creating the table
             print(schema_cols_name)
             if schema_cols_name:
-                # Create dynamic model
                 model = create_dynamic_model(table_name, schema_cols_name)
 
-                # Create the table
                 with connection.schema_editor() as schema_editor:
                     schema_editor.create_model(model)
+                
 
-                # Getting the data from the PDF file
+                #storin our data here
                 dfs = tabula.read_pdf(uploaded_pdf, pages="all")
                 for df in dfs:
-                    # Iterate over the DataFrame and save each row into the dynamically created table
                     for _, row in df.iterrows():
                         row_data = {col: str(row[col]) for col in schema_cols_name if col in df.columns}
                         model_instance = model(**row_data)
@@ -56,6 +53,5 @@ def homePage(request):
                 return HttpResponse("No column names provided, table not created.")
 
     except Exception as e:
-        return HttpResponse(f"Error in request: {str(e)}")  # Print the exception message
-
+        return HttpResponse(f"Error in request: {str(e)}")  
     return render(request, "index.html")
